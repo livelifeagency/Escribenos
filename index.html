@@ -3,10 +3,10 @@
 <script type="text/javascript">
 // Create an array of the links to choose from:
 var links = [
-    { url: "https://api.whatsapp.com/send?phone=584246592065&text=Hola%20Maye,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Maye" },
-    { url: "https://api.whatsapp.com/send?phone=573214638958&text=Hola%20Kim,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Kim" },
-    { url: "https://api.whatsapp.com/send?phone=573247579751&text=Hola%20Jessika,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Jessika" },
-    { url: "https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Liz" }
+    { url: "https://api.whatsapp.com/send?phone=584246592065&text=Hola%20Maye,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Maye", count: 0 },
+    { url: "https://api.whatsapp.com/send?phone=573214638958&text=Hola%20Kim,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Kim", count: 0 },
+    { url: "https://api.whatsapp.com/send?phone=573247579751&text=Hola%20Jessika,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Jessika", count: 0 },
+    { url: "https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Liz", count: 0 }
 ];
 
 function openLink() {
@@ -16,8 +16,9 @@ function openLink() {
 
     // Update the count in localStorage
     var countKey = "count_" + selectedLink.name;
-    var currentCount = localStorage.getItem(countKey) || 0;
-    localStorage.setItem(countKey, parseInt(currentCount) + 1);
+    var currentCount = parseInt(localStorage.getItem(countKey) || 0);
+    selectedLink.count = currentCount + 1;
+    localStorage.setItem(countKey, selectedLink.count);
 
     // Update the displayed counts
     updateDisplayedCounts();
@@ -28,14 +29,14 @@ function openLink() {
 }
 
 function updateDisplayedCounts() {
-    // Update the counts displayed directly in the HTML
+    // Update the counts in the links array and display them
     links.forEach(function(link, index) {
         var countKey = "count_" + link.name;
-        var count = localStorage.getItem(countKey) || 0;
+        link.count = parseInt(localStorage.getItem(countKey) || 0);
 
-        // Update the corresponding span element with the count
-        var countElement = document.getElementById("count_" + index);
-        countElement.textContent = count;
+        // Update the corresponding display with the count
+        var linkElement = document.getElementById("link_" + index);
+        linkElement.textContent = JSON.stringify(link);
     });
 }
 </script>
@@ -43,11 +44,12 @@ function updateDisplayedCounts() {
 <body onload="openLink(); updateDisplayedCounts();">
     <h2>Registro de Redirecciones:</h2>
     <ul>
-        <li>Maye: <a href="https://api.whatsapp.com/send?phone=584246592065&text=Hola%20Maye,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.">Enlace</a> - Redirecciones: <span id="count_0">0</span></li>
-        <li>Kim: <a href="https://api.whatsapp.com/send?phone=573214638958&text=Hola%20Kim,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.">Enlace</a> - Redirecciones: <span id="count_1">0</span></li>
-        <li>Jessika: <a href="https://api.whatsapp.com/send?phone=573247579751&text=Hola%20Jessika,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.">Enlace</a> - Redirecciones: <span id="count_2">0</span></li>
-        <li>Liz: <a href="https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.">Enlace</a> - Redirecciones: <span id="count_3">0</span></li>
+        <li id="link_0">{ url: "https://api.whatsapp.com/send?phone=584246592065&text=Hola%20Maye,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Maye", count: 0 }</li>
+        <li id="link_1">{ url: "https://api.whatsapp.com/send?phone=573214638958&text=Hola%20Kim,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Kim", count: 0 }</li>
+        <li id="link_2">{ url: "https://api.whatsapp.com/send?phone=573247579751&text=Hola%20Jessika,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Jessika", count: 0 }</li>
+        <li id="link_3">{ url: "https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Liz", count: 0 }</li>
     </ul>
 </body>
 </html>
+
 

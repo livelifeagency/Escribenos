@@ -1,27 +1,42 @@
-<html>
+<html> 
 <head>
 <script type="text/javascript">
-<!--
 // Create an array of the links to choose from:
-var links = new Array();
-links[0] = "https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-links[1] = "https://api.whatsapp.com/send?phone=584246592065&text=Hola%20Maye,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-links[2] = "https://api.whatsapp.com/send?phone=573214638958&text=Hola%20Kim,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-links[3] = "https://api.whatsapp.com/send?phone=584141423376&text=Hola%20Angel,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-links[4] = "https://api.whatsapp.com/send?phone=573247579751&text=Hola%20Jessika,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-links[5] = "https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-links[6] = "https://api.whatsapp.com/send?phone=573016373378&text=Hola%20Leidy,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-  
+var links = [
+    { url: "https://api.whatsapp.com/send?phone=584246592065&text=Hola%20Maye,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Maye" },
+    { url: "https://api.whatsapp.com/send?phone=573214638958&text=Hola%20Kim,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Kim" },
+    { url: "https://api.whatsapp.com/send?phone=573247579751&text=Hola%20Jessika,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Jessika" },
+    { url: "https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💪.", name: "Liz" }
+];
+
 function openLink() {
-  // Chooses a random link:
-  var i = Math.floor(Math.random() * links.length);
-  // Directs the browser to the chosen target:
-  parent.location = links[i];
-  return false;
+    // Chooses a random link:
+    var i = Math.floor(Math.random() * links.length);
+    var selectedLink = links[i];
+
+    // Update the count in localStorage
+    var countKey = "count_" + selectedLink.name;
+    var currentCount = localStorage.getItem(countKey) || 0;
+    localStorage.setItem(countKey, parseInt(currentCount) + 1);
+
+    // Directs the browser to the chosen target:
+    parent.location = selectedLink.url;
+    return false;
 }
-//-->
+
+function showCounts() {
+    // Display the counts for each link
+    var counts = links.map(function(link) {
+        var countKey = "count_" + link.name;
+        var count = localStorage.getItem(countKey) || 0;
+        return link.name + ": " + count + " redirecciones";
+    });
+
+    alert("Registro de redirecciones:\n" + counts.join("\n"));
+}
 </script>
 </head>
 <body onload="openLink();">
+    <button onclick="showCounts()">Mostrar registro de redirecciones</button>
 </body>
 </html>

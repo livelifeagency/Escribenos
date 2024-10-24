@@ -1,4 +1,4 @@
-<html> 
+<html>
 <head>
 <script type="text/javascript">
 // Create an array of the links to choose from:
@@ -19,24 +19,33 @@ function openLink() {
     var currentCount = localStorage.getItem(countKey) || 0;
     localStorage.setItem(countKey, parseInt(currentCount) + 1);
 
+    // Update the displayed counts
+    updateDisplayedCounts();
+
     // Directs the browser to the chosen target:
     parent.location = selectedLink.url;
     return false;
 }
 
-function showCounts() {
+function updateDisplayedCounts() {
     // Display the counts for each link
-    var counts = links.map(function(link) {
+    var countsContainer = document.getElementById("countsContainer");
+    countsContainer.innerHTML = ""; // Clear previous content
+
+    links.forEach(function(link) {
         var countKey = "count_" + link.name;
         var count = localStorage.getItem(countKey) || 0;
-        return link.name + ": " + count + " redirecciones";
-    });
 
-    alert("Registro de redirecciones:\n" + counts.join("\n"));
+        // Create a new paragraph element for each count
+        var p = document.createElement("p");
+        p.textContent = link.name + ": " + count + " redirecciones";
+        countsContainer.appendChild(p);
+    });
 }
 </script>
 </head>
-<body onload="openLink();">
-    <button onclick="showCounts()">Mostrar registro de redirecciones</button>
+<body onload="openLink(); updateDisplayedCounts();">
+    <h2>Registro de Redirecciones:</h2>
+    <div id="countsContainer"></div>
 </body>
 </html>

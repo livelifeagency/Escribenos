@@ -28,24 +28,18 @@ function openLink() {
 }
 
 function updateDisplayedCounts() {
-    // Display the counts for each link
-    var countsContainer = document.getElementById("countsContainer");
-    countsContainer.innerHTML = ""; // Clear previous content
-
-    links.forEach(function(link) {
+    // Update the counts displayed directly in the HTML
+    links.forEach(function(link, index) {
         var countKey = "count_" + link.name;
         var count = localStorage.getItem(countKey) || 0;
 
-        // Create a new paragraph element for each count
-        var p = document.createElement("p");
-        p.textContent = link.name + ": " + count + " redirecciones";
-        countsContainer.appendChild(p);
+        // Update the corresponding span element with the count
+        var countElement = document.getElementById("count_" + index);
+        countElement.textContent = count;
     });
 }
 </script>
 </head>
 <body onload="openLink(); updateDisplayedCounts();">
-    <h2>Registro de Redirecciones:</h2>
-    <div id="countsContainer"></div>
-</body>
-</html>
+    <h2>
+

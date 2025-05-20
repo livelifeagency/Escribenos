@@ -1,32 +1,24 @@
 <html>
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11454650554"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'AW-11454650554');
-    </script>
-
-    <script type="text/javascript">
-        // Create an array of the links to choose from:
-        var links = new Array();
-        links[0] = "https://api.whatsapp.com/send?phone=573017623728&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-        links[1] = "https://api.whatsapp.com/send?phone=573247579751&text=Hola%20Jessika,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20👧.";
-        
-        function openLink() {
-            // Chooses a random link:
-            var i = Math.floor(Math.random() * links.length);
-            // Directs the browser to the chosen target:
-            parent.location = links[i];
-            return false;
-        }
-    </script>
+<script type="text/javascript">
+<!--
+// Create an array of the links to choose from:
+var links = new Array();
+links[0] = "https://api.whatsapp.com/send?phone=573205737550&text=Hola%20Liz,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💜.";
+links[1] = "https://api.whatsapp.com/send?phone=573044933927&text=Hola%20Jess,%20me%20interesa,%20cual%20es%20el%20paso%20a%20seguir?%20💜.";
+  
+  
+function openLink() {
+  // Chooses a random link:
+  var i = Math.floor(Math.random() * links.length);
+  // Directs the browser to the chosen target:
+  parent.location = links[i];
+  return false;
+}
+//-->
+</script>
 </head>
 <body onload="openLink();">
 </body>
 </html>
-
 
